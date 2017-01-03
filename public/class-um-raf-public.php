@@ -74,7 +74,7 @@ class Um_Raf_Public {
 		add_action('wp_ajax_um_raf_submit', array($this, 'process_submission'));
 		add_action('wp_ajax_nopriv_um_raf_submit', array($this, 'process_submission'));
 		add_action('um_after_login_fields', array($this, 'add_resend_link_to_login_form'), 1002);
-		add_action('um_raf_show_resend_link', array($this, 'display_resend_link'));
+		add_action('um_raf_show_resend_link', array($this, 'display_resend_link'), 10, 1);
 	}
 
 	/**
@@ -165,12 +165,12 @@ class Um_Raf_Public {
 	public function add_resend_link_to_login_form(){
 		?>
 		<div class="um-col-alt-b">
-			<?php do_action('um_raf_show_resend_link'); ?>
+			<?php do_action('um_raf_show_resend_link', 'um-link-alt'); ?>
 		</div>
 		<?php
 	}
 
-	public function display_resend_link(){
+	public function display_resend_link($class=''){
 		if(!function_exists('um_get_core_page')){
 			return;
 		}
@@ -180,7 +180,7 @@ class Um_Raf_Public {
 			return;
 		}
 		?>
-		<a href="<?php echo $resend_url; ?>" class="um-link-alt"><?php echo apply_filters('um_raf_resend_form_link_text', __('Resend your activation email','um_raf')); ?></a>
+		<a href="<?php echo $resend_url; ?>" class="<?php echo $class; ?>"><?php echo apply_filters('um_raf_resend_form_link_text', __('Resend your activation email','um_raf')); ?></a>
 		<?php
 	}
 

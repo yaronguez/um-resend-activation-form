@@ -58,7 +58,7 @@ class Um_Resend_Activation_Form {
 	public function __construct() {
 
 		$this->plugin_name = 'um-resend-activation-form';
-		$this->version = '1.0.0';
+		$this->version = '1.0.1';
 
 		$this->load_dependencies();
 	}

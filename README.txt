@@ -35,8 +35,9 @@ NOTE: until this plugin is added to the WordPress repo, you will have to install
 == Frequently Asked Questions ==
 
 = How do I display a link to the form somewhere else? =
-Add the code: `<?php do_action('um_raf_show_resend_link'); ?>
-`
+Add the code: `<?php do_action('um_raf_show_resend_link'); ?> Optionally specify any CSS classes in the second argument, e.g.
+`<?php do_action('um_raf_resend_link', 'my_class'); ?>`
+
 = How do I override the styles you provided? =
 Create a file called `um_raf.css` in the root of your theme directory. This file will be loaded
 automatically after the plugin's own stylesheet.
