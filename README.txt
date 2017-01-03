@@ -31,14 +31,6 @@ See FAQ for customization options.
 
 == Frequently Asked Questions ==
 
-*Customization Options*
-* To add custom styles, simply create a file called `um_raf.css` in the root of your theme directory. This file
-will be loaded after the plugin's own stylesheet.
-* Numerous hooks and filters are provided to customize the output of the form and messages. Take a look at `public/partials/um-raf-output.php`
-to see all of the hooks and filters used in the form itself. The following filters are available to modify messages:
-* For further customization, you can create your own custom form output. Copy `um-raf-output.php` file from the `public/partials` directory
-  into the root folder of your theme. Be sure not to modify any of the element IDs.
-
 = How do I display a link to the form somewhere else? =
 Add the code: `<?php do_action('um_raf_show_resend_link'); ?>
 `
@@ -57,6 +49,9 @@ Many! Take a look at `templates/um-raf-output.php` to see them all.
 * `um_raf_no_um_message`: error message displayed instead of form if Ultimate Member plugin is not active.
 * `um_raf_resend_form_link_text`: text used in link to the resend form
 
+= Your hooks do not satisfy me! I want to create my own form =
+Well, if you must. Just copy `um-raf-output.php` the `templates` directory and past it in the root folder of your theme.
+Then feel free to customize away! However, tread carefully and be sure not to modify any of the element IDs.
 
 == Changelog ==
 
