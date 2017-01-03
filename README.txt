@@ -21,6 +21,9 @@ Ultimate Member is required for this addon to work properly.
 
 See FAQ for customization options.
 
+NOTE: until this plugin is added to the WordPress repo, you will have to install the
+(GitHub Updater plugin)[https://github.com/afragen/github-updater] for updates.
+
 
 == Installation ==
 
