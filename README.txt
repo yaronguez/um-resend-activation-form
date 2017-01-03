@@ -1,0 +1,64 @@
+=== Ultimate Member Resend Activation Form ===
+Contributors: yaronguez
+Donate link: https://www.paypal.me/TrestianLLC
+Tags: ultimate-member
+Requires at least: 3.0.1
+Tested up to: 4.7
+Stable tag: 'trunk'
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Adds a [um_resend_activation_form] shortcode allowing users to resend their account activation email
+
+== Description ==
+
+This addon for Ultimate Member provides a form for users to resend their account activation email. This is
+useful if the activation email has expired or has been lost. Simply add a [um_resend_activation_form] shortcode
+to the page of your choice and specify the page in the _Setup_ section of the _Ultimate Member Settings_ page.
+The form is submitted using AJAX.
+
+Ultimate Member is required for this addon to work properly.
+
+See FAQ for customization options.
+
+
+== Installation ==
+
+1. Upload `um-resend-activation-form.php` to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Add a `[um_resend_activation_form]` shortcode to the page of your choice
+1. Visit Ultimate Member -> Settings -> Setup and specify which page the shortcode was added to
+
+== Frequently Asked Questions ==
+
+*Customization Options*
+* To add custom styles, simply create a file called `um_raf.css` in the root of your theme directory. This file
+will be loaded after the plugin's own stylesheet.
+* Numerous hooks and filters are provided to customize the output of the form and messages. Take a look at `public/partials/um-raf-output.php`
+to see all of the hooks and filters used in the form itself. The following filters are available to modify messages:
+* For further customization, you can create your own custom form output. Copy `um-raf-output.php` file from the `public/partials` directory
+  into the root folder of your theme. Be sure not to modify any of the element IDs.
+
+= How do I display a link to the form somewhere else? =
+Add the code: `<?php do_action('um_raf_show_resend_link'); ?>
+`
+= How do I override the styles you provided? =
+Create a file called `um_raf.css` in the root of your theme directory. This file will be loaded
+automatically after the plugin's own stylesheet.
+
+= What hooks are available to customize the form? =
+Many! Take a look at `templates/um-raf-output.php` to see them all.
+
+= What filters are provided to customize the messages returned? =
+* `um_raf_invalid_nonce_message`: error message displayed if nonce has expired
+* `um_raf_no_user_message`: error message displayed if no user is found for the given email
+* `um_raf_not_pending_message`: error message displayed if user's account does not require activation
+* `um_raf_email_sent_message`: success message displayed when activation email is sent.
+* `um_raf_no_um_message`: error message displayed instead of form if Ultimate Member plugin is not active.
+* `um_raf_resend_form_link_text`: text used in link to the resend form
+
+
+== Changelog ==
+
+= 1.0 =
+* Initial launch

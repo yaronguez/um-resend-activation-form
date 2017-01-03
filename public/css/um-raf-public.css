@@ -1,0 +1,137 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+.um-raf-label {
+	display: block;
+}
+
+.um-raf-field {
+	line-height: 1.5em;
+	padding: 8px 10px;
+	width: auto;
+	font-size: 18px;
+	border: 0 none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.um-raf-button {
+	border: 0;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding: 8px 12px;
+	font-size: 18px;
+	line-height: 1.5em;
+	background-color: #3ba1da;
+	color: #FFF;
+	position: relative;
+}
+
+.um-raf-button:hover, .um-raf-button:active, .um-raf-button:focus{
+	background-color:#44b0ec;
+}
+
+.um-raf-button:disabled{
+	background-color: #236083;
+	color: #236083;
+	cursor: no-drop;
+}
+
+.um-raf-alert {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	display: none;
+}
+
+.um-raf-alert-success {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+
+.um-raf-alert-error {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+#um-raf-loader {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: none;
+}
+
+.um-raf-button:disabled #um-raf-loader{
+	display: block;
+}
+
+.um-raf-loader {
+	font-size: 18px;
+	margin: 8px auto;
+	text-indent: -9999em;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
+	background: #ffffff;
+	background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+	position: relative;
+	-webkit-animation: load3 1.4s infinite linear;
+	animation: load3 1.4s infinite linear;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+.um-raf-loader:before {
+	width: 50%;
+	height: 50%;
+	background: #ffffff;
+	border-radius: 100% 0 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+}
+.um-raf-loader:after {
+	background: #236083;
+	width: 75%;
+	height: 75%;
+	border-radius: 50%;
+	content: '';
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+@-webkit-keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes load3 {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
