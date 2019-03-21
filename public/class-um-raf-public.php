@@ -104,7 +104,7 @@ class Um_Raf_Public {
 	}
 
 	public function output_form(){
-		if(!class_exists('UM_API')){
+		if(!class_exists('UM')){
 			return apply_filters('um_raf_no_um_message', __('The plugin Ultimate Member is required and not currently installed.','um_raf'));
 		}
 		// Load the scripts and styles
