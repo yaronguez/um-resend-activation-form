@@ -155,10 +155,10 @@ class Um_Raf_Public {
 			Um_Raf_Ajax::return_error(apply_filters('um_raf_not_pending_message', __('That email address has already been confirmed.', 'um_raf')));
 		}
 
-		global $ultimatemember;
 		um_fetch_user($user->ID);
-		$ultimatemember->user->email_pending();
-
+		
+		UM()->user()->email_pending();
+		
 		Um_Raf_Ajax::return_success(apply_filters('um_raf_email_sent_message', __('Your activation email has been resent.', 'um_raf')));
 	}
 
