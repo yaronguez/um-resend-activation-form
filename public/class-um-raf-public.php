@@ -119,7 +119,8 @@ class Um_Raf_Public {
 		// Add the ajax URL
 		wp_localize_script( $this->plugin_name, 'UM_RAF',
 			array( 'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce' => wp_create_nonce(self::NONCE_ACTION)
+				'nonce' => wp_create_nonce(self::NONCE_ACTION),
+			       'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
 				) );
 
 		// Fetch the template output
