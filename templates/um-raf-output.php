@@ -41,14 +41,14 @@
 	<?php 
 	$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
 	if($recaptcha_status):
-	$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-	?>
-	
-	<?php do_action('um_raf_before_field') ?>
-	<div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_sitekey; ?>"></div>
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-	<?php do_action('um_raf_after_field') ?>
-	
+		$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+		?>
+
+		<?php do_action('um_raf_before_field') ?>
+		<div class="g-recaptcha" data-sitekey="<?php echo $recaptcha_sitekey; ?>"></div>
+		<script src='https://www.google.com/recaptcha/api.js'></script>
+		<?php do_action('um_raf_after_field') ?>
+	<?php endif; ?>
 	
 	<?php do_action('um_raf_before_button');?>
 	<button type="submit" class="<?php echo apply_filters('um_raf_button_class', 'um-raf-button') ?>">
