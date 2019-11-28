@@ -147,9 +147,9 @@ class Um_Raf_Public {
 			Um_Raf_Ajax::check_missing_data('recaptcha_input', 'Invalid form submission - Recaptcha required');
 			$recaptcha_secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
 			//sends post request to the URL and tranforms response to JSON
-			$responseCaptcha = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$recaptcha_secretkey.'&response='.$POST['recaptcha_input']));
+			$responseCaptcha = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$recaptcha_secretkey.'&response='.$_POST['recaptcha_input']));
 			if($responseCaptcha->success != true){
-				Um_Raf_Ajax::return_error(apply_filters('um_raf_invalid_nonce_message', __('Invalid recaptcha input', 'um_raf')));
+				Um_Raf_Ajax::return_error(apply_filters('um_raf_invalid_nonce_message', __('Invalid recaptcha input - please reload the page and try again', 'um_raf')));
 			}
 		}
 		
