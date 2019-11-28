@@ -117,10 +117,16 @@ class Um_Raf_Public {
 		}
 
 		// Add the ajax URL
+		$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
+		if($recaptcha_status){
+			$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+		} else {
+			$recaptcha_sitekey = '';
+		}
 		wp_localize_script( $this->plugin_name, 'UM_RAF',
 			array( 'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce(self::NONCE_ACTION),
-			       'sitekey' => UM()->options()->get( 'g_recaptcha_sitekey' )
+			       'sitekey' => $recaptcha_sitekey
 				) );
 
 		// Fetch the template output
@@ -135,7 +141,18 @@ class Um_Raf_Public {
 	public function process_submission(){
 		Um_Raf_Ajax::check_missing_data('email', 'Email is required');
 		Um_Raf_Ajax::check_missing_data('nonce', 'Invalid form submission');
-
+		
+		$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
+		if($recaptcha_status){
+			Um_Raf_Ajax::check_missing_data('recaptcha_input', 'Invalid form submission - Recaptcha required');
+			$recaptcha_secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
+			//sends post request to the URL and tranforms response to JSON
+			$responseCaptcha = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$recaptcha_secretkey.'&response='.$POST['recaptcha_input']));
+			if($responseCaptcha->success != true){
+				Um_Raf_Ajax::return_error(apply_filters('um_raf_invalid_nonce_message', __('Invalid recaptcha input', 'um_raf')));
+			}
+		}
+		
 		if(!check_ajax_referer( self::NONCE_ACTION, 'nonce', false )){
 			Um_Raf_Ajax::return_error(apply_filters('um_raf_invalid_nonce_message', __('The page has expired. Please refresh your browser.', 'um_raf')));
 		}
