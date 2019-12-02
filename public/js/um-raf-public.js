@@ -11,7 +11,8 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'um_raf_submit',
                 email: $('#um-raf-email').val(),
-                nonce: UM_RAF.nonce
+                nonce: UM_RAF.nonce,
+                recaptcha_input: grecaptcha && grecaptcha.getResponse()? grecaptcha.getResponse():'',
             },
             dataType: 'json',
             success: function(data) {

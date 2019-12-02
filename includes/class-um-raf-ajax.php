@@ -13,7 +13,7 @@ class Um_Raf_Ajax {
 	public static function return_response($message, $success){
 		$response = json_encode(array(
 			'success' => $success,
-			message => $message
+			'message' => $message
 		));
 		echo $response;
 		wp_die();
