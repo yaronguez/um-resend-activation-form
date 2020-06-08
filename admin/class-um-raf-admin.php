@@ -103,7 +103,9 @@ class Um_Raf_Admin {
 	}
 
 	public function add_resend_page($pages){
-		$pages['resend-activation'] = __('Resend activation email page', 'um_raf');
+		$pages['resend-activation'] = [
+			'title' => __('Resend activation email page', 'um_raf')
+		];
 		return $pages;
 	}
 
