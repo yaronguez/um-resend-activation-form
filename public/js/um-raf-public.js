@@ -13,7 +13,7 @@ jQuery(document).ready(function ($) {
 				email: $("#um-raf-email").val(),
 				nonce: UM_RAF.nonce,
 				recaptcha_input:
-					grecaptcha && grecaptcha.getResponse()
+					typeof grecaptcha != "undefined" && grecaptcha.getResponse()
 						? grecaptcha.getResponse()
 						: "",
 			},
