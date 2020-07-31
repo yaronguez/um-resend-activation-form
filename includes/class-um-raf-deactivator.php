@@ -1,12 +1,11 @@
 <?php
-
 /**
  * Fired during plugin deactivation
  *
- * @link       https://www.trestian.com
- * @since      1.0.0
+ * @link https://www.trestian.com
+ * @since 1.0.0
  *
- * @package    Um_Resend_Activation_Form
+ * @package Um_Resend_Activation_Form
  * @subpackage Um_Resend_Activation_Form/includes
  */
 
@@ -15,10 +14,10 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
- * @package    Um_Resend_Activation_Form
+ * @since 1.0.0
+ * @package Um_Resend_Activation_Form
  * @subpackage Um_Resend_Activation_Form/includes
- * @author     Yaron Guez <yaron@trestian.com>
+ * @author Yaron Guez <yaron@trestian.com>
  */
 class Um_Raf_Deactivator {
 
@@ -27,10 +26,8 @@ class Um_Raf_Deactivator {
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since 1.0.0
 	 */
 	public static function deactivate() {
-
 	}
-
 }
