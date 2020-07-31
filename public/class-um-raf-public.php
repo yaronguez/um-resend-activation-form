@@ -158,6 +158,10 @@ class Um_Raf_Public {
 		Um_Raf_Ajax::check_missing_data( 'email', 'Email is required' );
 		Um_Raf_Ajax::check_missing_data( 'nonce', 'Invalid form submission' );
 
+		if ( ! check_ajax_referer( self::NONCE_ACTION, 'nonce', false ) ) {
+			Um_Raf_Ajax::return_error( apply_filters( 'um_raf_invalid_nonce_message', __( 'The page has expired. Please refresh your browser.', 'um_raf' ) ) );
+		}
+
 		$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
 		if ( $recaptcha_status ) {
 			Um_Raf_Ajax::check_missing_data( 'recaptcha_input', 'Invalid form submission - Recaptcha required' );
@@ -169,12 +173,7 @@ class Um_Raf_Public {
 			}
 		}
 
-		if ( ! check_ajax_referer( self::NONCE_ACTION, 'nonce', false ) ) {
-			Um_Raf_Ajax::return_error( apply_filters( 'um_raf_invalid_nonce_message', __( 'The page has expired. Please refresh your browser.', 'um_raf' ) ) );
-		}
-
 		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-
 		if ( ! is_email( $email ) ) {
 			Um_Raf_Ajax::return_error( __( 'Invalid email provided', 'um_raf' ) );
 		}
