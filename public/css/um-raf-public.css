@@ -74,6 +74,7 @@
 }
 
 .um-raf-loader {
+	display: block;
 	font-size: 18px;
 	margin: 8px auto;
 	text-indent: -9999em;
