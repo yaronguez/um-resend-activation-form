@@ -162,8 +162,9 @@ class Um_Raf_Public {
 			Um_Raf_Ajax::return_error( apply_filters( 'um_raf_invalid_nonce_message', __( 'The page has expired. Please refresh your browser.', 'um_raf' ) ) );
 		}
 
-		$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
-		if ( $recaptcha_status ) {
+		$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
+		$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+		if ( $recaptcha_status && ! empty( $recaptcha_sitekey ) ) {
 			Um_Raf_Ajax::check_missing_data( 'recaptcha_input', 'Invalid form submission - Recaptcha required' );
 			$recaptcha_secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
 			// Sends post request to the URL and tranforms response to JSON.
