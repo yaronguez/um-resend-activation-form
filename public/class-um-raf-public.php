@@ -127,12 +127,9 @@ class Um_Raf_Public {
 		}
 
 		// Add the ajax URL.
-		$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
-		if ( $recaptcha_status ) {
-			$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-		} else {
-			$recaptcha_sitekey = '';
-		}
+		$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
+		$recaptcha_sitekey = $recaptcha_status ? UM()->options()->get( 'g_recaptcha_sitekey' ) : '';
+
 		wp_localize_script(
 			$this->plugin_name,
 			'UM_RAF',
