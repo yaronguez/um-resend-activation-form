@@ -31,9 +31,9 @@ defined( 'ABSPATH' ) || exit;
 	<?php do_action( 'um_raf_after_field' ); ?>
 
 	<?php
-	$recaptcha_status = UM()->options()->get( 'g_recaptcha_status' );
-	if ( $recaptcha_status ) :
-		$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+	$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
+	$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+	if ( $recaptcha_status && ! empty( $recaptcha_sitekey ) ) :
 		?>
 		<?php do_action( 'um_raf_before_field' ); ?>
 		<div class="g-recaptcha" data-sitekey="<?php echo esc_attr( $recaptcha_sitekey ); ?>"></div>
@@ -42,12 +42,7 @@ defined( 'ABSPATH' ) || exit;
 	<?php endif; ?>
 
 	<?php do_action( 'um_raf_before_button' ); ?>
-	<button type="submit" class="<?php echo esc_attr( apply_filters( 'um_raf_button_class', 'um-raf-button' ) ); ?>">
-		<?php echo esc_html( apply_filters( 'um_raf_button_text', __( 'Resend', 'um_raf' ) ) ); ?>
-		<div id="um-raf-loader">
-			<div class="<?php echo esc_attr( apply_filters( 'um_raf_loader_class', 'um-raf-loader' ) ); ?>"></div>
-		</div>
-	</button>
+	<button type="submit" class="<?php echo esc_attr( apply_filters( 'um_raf_button_class', 'um-raf-button' ) ); ?>"><?php echo esc_html( apply_filters( 'um_raf_button_text', __( 'Resend', 'um_raf' ) ) ); ?><span id="um-raf-loader"><span class="<?php echo esc_attr( apply_filters( 'um_raf_loader_class', 'um-raf-loader' ) ); ?>"></span></span></button>
 	<?php do_action( 'um_raf_after_button' ); ?>
 </form>
 <?php do_action( 'um_raf_before_form' ); ?>
