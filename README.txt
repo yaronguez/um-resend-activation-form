@@ -58,6 +58,13 @@ Well, if you must. Just copy `um-raf-output.php` the `templates` directory and p
 Then feel free to customize away! However, tread carefully and be sure not to modify any of the element IDs.
 
 == Changelog ==
+= 1.0.2 =
+* Applied WPCS validation
+* Fixed the captcha errors
+
+= 1.0.1 =
+* Fixed the version conflicts
+* Added captcha support
 
 = 1.0 =
 * Initial launch
