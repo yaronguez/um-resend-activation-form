@@ -81,6 +81,9 @@ class Um_Raf_Public {
 		// Set resend links.
 		add_action( 'um_after_login_fields', array( $this, 'add_resend_link_to_login_form' ), 1002 );
 		add_action( 'um_raf_show_resend_link', array( $this, 'display_resend_link' ), 10, 1 );
+
+		// Add captcha field.
+		add_action( 'um_raf_before_button', array( $this, 'add_captcha' ) );
 	}
 
 	/**
@@ -104,7 +107,34 @@ class Um_Raf_Public {
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts() {
+		wp_register_script( $this->plugin_name . '-google-recapthca-api-v2', 'https://www.google.com/recaptcha/api.js' ); // @codingStandardsIgnoreLine
 		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/um-raf-public.js', array( 'jquery' ), $this->version, false );
+	}
+
+	/**
+	 * Check if captcha enabled?
+	 *
+	 * We only support version 2 right now.
+	 *
+	 * @since 1.0.2
+	 * @author Vijay Hardaha
+	 * @return bool
+	 */
+	public function captcha_enabled() {
+		$enable       = false;
+		$recaptcha    = UM()->options()->get( 'g_recaptcha_status' );
+		$your_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+		$your_secret  = UM()->options()->get( 'g_recaptcha_secretkey' );
+
+		if ( $recaptcha ) {
+			$enable = true;
+		}
+
+		if ( ! $your_sitekey || ! $your_secret ) {
+			$enable = false;
+		}
+
+		return $enable;
 	}
 
 	/**
@@ -118,8 +148,11 @@ class Um_Raf_Public {
 		}
 
 		// Load the scripts and styles.
-		wp_enqueue_script( $this->plugin_name );
 		wp_enqueue_style( $this->plugin_name );
+		if ( $this->captcha_enabled() ) {
+			wp_enqueue_script( $this->plugin_name . '-google-recapthca-api-v2' );
+		}
+		wp_enqueue_script( $this->plugin_name );
 
 		// Load custom styles.
 		if ( $this->has_custom_css ) {
@@ -127,16 +160,12 @@ class Um_Raf_Public {
 		}
 
 		// Add the ajax URL.
-		$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
-		$recaptcha_sitekey = $recaptcha_status ? UM()->options()->get( 'g_recaptcha_sitekey' ) : '';
-
 		wp_localize_script(
 			$this->plugin_name,
 			'UM_RAF',
 			array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( self::NONCE_ACTION ),
-				'sitekey'  => $recaptcha_sitekey,
 			)
 		);
 
@@ -162,14 +191,12 @@ class Um_Raf_Public {
 			Um_Raf_Ajax::return_error( apply_filters( 'um_raf_invalid_nonce_message', __( 'The page has expired. Please refresh your browser.', 'um_raf' ) ) );
 		}
 
-		$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
-		$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-		if ( $recaptcha_status && ! empty( $recaptcha_sitekey ) ) {
+		if ( $this->captcha_enabled() ) {
 			Um_Raf_Ajax::check_missing_data( 'recaptcha_input', 'Invalid form submission - Recaptcha required' );
-			$recaptcha_secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
+			$secretkey = UM()->options()->get( 'g_recaptcha_secretkey' );
 			// Sends post request to the URL and tranforms response to JSON.
-			$response_captcha = json_decode( file_get_contents( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $recaptcha_secretkey . '&response=' . $_POST['recaptcha_input'] ) ); // @codingStandardsIgnoreLine
-			if ( true !== $response_captcha->success ) {
+			$captcha = json_decode( file_get_contents( 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secretkey . '&response=' . $_POST['recaptcha_input'] ) ); // @codingStandardsIgnoreLine
+			if ( true !== $captcha->success ) {
 				Um_Raf_Ajax::return_error( apply_filters( 'um_raf_invalid_nonce_message', __( 'Invalid recaptcha input - please reload the page and try again', 'um_raf' ) ) );
 			}
 		}
@@ -193,6 +220,21 @@ class Um_Raf_Public {
 		UM()->user()->email_pending();
 
 		Um_Raf_Ajax::return_success( apply_filters( 'um_raf_email_sent_message', __( 'Your activation email has been resent.', 'um_raf' ) ) );
+	}
+
+	/**
+	 * Add captcha field if enabled
+	 *
+	 * @since 1.0.2
+	 * @author Vijay Hardaha
+	 */
+	public function add_captcha() {
+		if ( $this->captcha_enabled() ) {
+			$sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
+			?>
+			<div class="g-recaptcha" data-sitekey="<?php echo esc_attr( $sitekey ); ?>"></div>
+			<?php
+		}
 	}
 
 	/**

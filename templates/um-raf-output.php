@@ -30,17 +30,6 @@ defined( 'ABSPATH' ) || exit;
 	<input id="um-raf-email" type="email" name="email" placeholder="<?php esc_attr_e( 'Enter your email', 'um_raf' ); ?>" class="<?php echo esc_attr( apply_filters( 'um_raf_field_class', 'um-raf-field' ) ); ?>" required />
 	<?php do_action( 'um_raf_after_field' ); ?>
 
-	<?php
-	$recaptcha_status  = UM()->options()->get( 'g_recaptcha_status' );
-	$recaptcha_sitekey = UM()->options()->get( 'g_recaptcha_sitekey' );
-	if ( $recaptcha_status && ! empty( $recaptcha_sitekey ) ) :
-		?>
-		<?php do_action( 'um_raf_before_field' ); ?>
-		<div class="g-recaptcha" data-sitekey="<?php echo esc_attr( $recaptcha_sitekey ); ?>"></div>
-		<script src='https://www.google.com/recaptcha/api.js'></script>
-		<?php do_action( 'um_raf_after_field' ); ?>
-	<?php endif; ?>
-
 	<?php do_action( 'um_raf_before_button' ); ?>
 	<button type="submit" class="<?php echo esc_attr( apply_filters( 'um_raf_button_class', 'um-raf-button' ) ); ?>"><?php echo esc_html( apply_filters( 'um_raf_button_text', __( 'Resend', 'um_raf' ) ) ); ?><span id="um-raf-loader"><span class="<?php echo esc_attr( apply_filters( 'um_raf_loader_class', 'um-raf-loader' ) ); ?>"></span></span></button>
 	<?php do_action( 'um_raf_after_button' ); ?>

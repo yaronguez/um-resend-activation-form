@@ -12,14 +12,12 @@
 	width: auto;
 	font-size: 18px;
 	border: 0 none;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
+	border-radius: 5px;
 }
 
 .um-raf-button {
 	border: 0;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-radius: 5px;
 	padding: 8px 12px;
 	font-size: 18px;
 	line-height: 1.5em;
