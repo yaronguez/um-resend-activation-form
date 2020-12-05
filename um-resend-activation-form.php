@@ -3,7 +3,7 @@
  * Plugin Name:       Ultimate Member - Resend Activation Email Form
  * Plugin URI:        https://github.com/yaronguez/um-resend-activation-form
  * Description:       Adds a [um_resend_activation_form] shortcode allowing users to resend their account activation email
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Yaron Guez
  * Author URI:        https://www.trestian.com
  * License:           GPL-2.0+
