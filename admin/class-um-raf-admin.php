@@ -91,13 +91,13 @@ class Um_Raf_Admin {
 				'notice_can_install_required'  => _n_noop(
 					'Ultimate Member Resend Activation Form requires the following plugin: %1$s.',
 					'Ultimate Member Resend Activation Form requires the following plugins: %1$s.',
-					'um-resend-activation-form'
+					'um_raf'
 				),
 				/* translators: 1: plugins count */
 				'notice_can_activate_required' => _n_noop(
 					'The following plugin, required by Ultimate Member Resend Activation Form, is currently inactive: %1$s.',
 					'The following plugins, required by Ultimate Member Resend Activation Form, are currently inactive: %1$s.',
-					'um-resend-activation-form'
+					'um_raf'
 				),
 			),
 

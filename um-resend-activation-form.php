@@ -8,8 +8,8 @@
  * Author URI:        https://www.trestian.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       um-resend-activation-form
- * Domain Path:       /languages
+ * Text Domain:       um_raf
+ * Domain Path:       /languages/
  * GitHub Plugin URI: https://github.com/yaronguez/um-resend-activation-form
  *
  * @link              https://www.trestian.com
@@ -22,6 +22,10 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
+}
+
+if ( ! defined( 'UM_RAF_PLUGIN_FILE' ) ) {
+	define( 'UM_RAF_PLUGIN_FILE', __FILE__ );
 }
 
 /**

@@ -40,11 +40,16 @@ class Um_Raf_i18n {
 	 * @since 1.0.0
 	 */
 	public function load_plugin_textdomain() {
-		load_plugin_textdomain(
-			'um_raf',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
+		if ( function_exists( 'determine_locale' ) ) {
+			$locale = determine_locale();
+		} else {
+			$locale = is_admin() ? get_user_locale() : get_locale();
+		}
 
+		$locale = apply_filters( 'plugin_locale', $locale, 'um_raf' );
+
+		unload_textdomain( 'um_raf' );
+		load_textdomain( 'um_raf', WP_LANG_DIR . '/um-resend-activation-form/um_raf-' . $locale . '.mo' );
+		load_plugin_textdomain( 'um_raf', false, plugin_basename( dirname( UM_RAF_PLUGIN_FILE ) ) . '/languages' );
 	}
 }
