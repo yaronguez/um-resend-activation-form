@@ -109,6 +109,16 @@ class Um_Raf_Public {
 	public function enqueue_scripts() {
 		wp_register_script( $this->plugin_name . '-google-recapthca-api-v2', 'https://www.google.com/recaptcha/api.js' ); // @codingStandardsIgnoreLine
 		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/um-raf-public.js', array( 'jquery' ), $this->version, false );
+		
+		// Add the ajax URL.
+		wp_localize_script(
+			$this->plugin_name,
+			'UM_RAF',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( self::NONCE_ACTION ),
+			)
+		);
 	}
 
 	/**
@@ -158,16 +168,6 @@ class Um_Raf_Public {
 		if ( $this->has_custom_css ) {
 			wp_enqueue_style( $this->plugin_name . '-custom' );
 		}
-
-		// Add the ajax URL.
-		wp_localize_script(
-			$this->plugin_name,
-			'UM_RAF',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( self::NONCE_ACTION ),
-			)
-		);
 
 		// Fetch the template output.
 		ob_start();
